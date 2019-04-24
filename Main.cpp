@@ -13,21 +13,25 @@
 #include <algorithm>
 #include <random>
 
+// Local includes
+// #include "Timer.hpp"
+
 int
 main (int argc, char** argv)
 {
+  // Start timer
+  // Timer timer;
+  
   // Get adjectives; put into vector
   std::vector<std::string> adjectives;
-  std::ifstream adjectivesFile;
-  adjectivesFile.open ("adjectives.txt");
+  std::ifstream adjectivesFile ("adjectives.txt");
   std::copy(std::istream_iterator<std::string> (adjectivesFile),
 	    std::istream_iterator<std::string> (),
 	    std::back_inserter (adjectives));
   
   // Get fruits; put into vector
   std::vector<std::string> fruits;
-  std::ifstream fruitsFile;
-  fruitsFile.open ("fruit.txt");
+  std::ifstream fruitsFile ("fruit.txt");
   std::copy(std::istream_iterator<std::string> (fruitsFile),
 	    std::istream_iterator<std::string> (),
 	    std::back_inserter (fruits));
@@ -45,7 +49,16 @@ main (int argc, char** argv)
   // Get a random fruit
   std::string fruit = fruits[fruitDis (gen)];
 
-  std::cout << adj << " " << fruit << std::endl;
+  // Write the "flavor" to a file
+  std::ofstream outFile ("flavor.txt");
+  outFile << adj << " " << fruit << std::endl;
+  
+  // Stop timer
+  // timer.stop ();
+
+  // Write flavor to std::out
+  //  std::cout << adj << " " << fruit << std::endl;
+  //            << timer.getElapsedMs () << "ms" << std::endl;
   
   return EXIT_SUCCESS;
 }
